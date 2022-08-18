@@ -9,20 +9,21 @@
 <ion-content color="dark">
   <div id="container">
 
-    <ion-card class="card" color="bulbasaur" *ngFor="let pokemon of listaPokemon">
+    <ion-card class="card" [color]="pokemon.types[0].type.name" *ngFor="let pokemon of listaPokemon">
       <ion-card-header>
         <ion-grid>
           <ion-row>
             <ion-col>
-        <img src="https://assets.pokemon.com/assets/cms2/img/pokedex/full/001.png">
+        <img
+        class="ion-float-right" 
+        [src]="'https://assets.pokemon.com/assets/cms2/img/pokedex/detail/'+pokemon.id.toString().padStart(3, '0')+'.png'">
              </ion-col>
              <ion-col>
         <ion-card-title>{{pokemon.name | titlecase}}</ion-card-title>
-        <ion-label color="grass">#001</ion-label>
+        <ion-label color="grass">#{{pokemon.id}}</ion-label>
         <br>
         <br>
-        <ion-badge color="grass">Grass</ion-badge>
-        <ion-badge color="poison">Poison</ion-badge>
+        <ion-badge *ngFor='let type of pokemon.types' [color]="type.type.name">{{type.type.name}}</ion-badge>
               </ion-col>
           </ion-row>
       </ion-grid>
